@@ -1,0 +1,26 @@
+-- 简单改移速脚本
+local Players = game:GetService("Players")
+local lplr = Players.LocalPlayer
+
+-- 想设多少就改这里
+local 速度值 = 100
+
+local function 设置移速()
+    local char = lplr.Character
+    if not char then return end
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    if hum then
+        hum.WalkSpeed = 速度值
+    end
+end
+
+-- 立即设置一次
+设置移速()
+
+-- 角色重生后自动再设置
+lplr.CharacterAdded:Connect(function()
+    task.wait(1)
+    设置移速()
+end)
+
+print("移速已设置为: " .. 速度值)
